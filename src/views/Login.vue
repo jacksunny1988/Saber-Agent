@@ -1,13 +1,66 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { handleLogin } from '@/api/user'
+import { useUserStore } from '@/store/user'
 
-const username = ref('')
-const password = ref('')
+const router = useRouter()
+const userStore = useUserStore()
+
+// 默认账号和密码
+const username = ref('R03248')
+const password = ref('R03248')
 const rememberPassword = ref(false)
 const showPassword = ref(false)
+const loading = ref(false)
+const errorMessage = ref('')
 
-const handleLogin = () => {
-  console.log('登录:', { username: username.value, password: password.value })
+// 页面加载时，如果 localStorage 中有保存的密码，自动填充
+if (typeof localStorage !== 'undefined') {
+  const savedUsername = localStorage.getItem('saved_username')
+  const savedPassword = localStorage.getItem('saved_password')
+  if (savedUsername && savedPassword) {
+    username.value = savedUsername
+    password.value = savedPassword
+    rememberPassword.value = true
+  }
+}
+
+const handleLoginSubmit = async () => {
+  loading.value = true
+  errorMessage.value = ''
+
+  try {
+    const res = await handleLogin({
+      user_name: username.value,
+      password: password.value
+    })
+
+    if (res.code === 200) {
+      const { access_token, user_id } = res.data
+      userStore.setToken(access_token, user_id)
+
+      // 如果勾选了记住密码，保存到 localStorage
+      if (rememberPassword.value) {
+        localStorage.setItem('saved_username', username.value)
+        localStorage.setItem('saved_password', password.value)
+      } else {
+        // 如果没有勾选，清除保存的密码
+        localStorage.removeItem('saved_username')
+        localStorage.removeItem('saved_password')
+      }
+
+      // 登录成功，跳转到首页
+      router.push('/')
+    } else {
+      errorMessage.value = res.msg || '登录失败'
+    }
+  } catch (error) {
+    console.error('登录失败:', error)
+    errorMessage.value = error.response?.data?.msg || '登录失败，请检查网络连接'
+  } finally {
+    loading.value = false
+  }
 }
 
 const togglePassword = () => {
@@ -36,7 +89,7 @@ const togglePassword = () => {
           </div>
 
           <!-- 登录表单 -->
-          <form class="login-form" @submit.prevent="handleLogin">
+          <form class="login-form" @submit.prevent="handleLoginSubmit">
             <!-- 用户名输入框 -->
             <div class="input-group">
               <span class="input-icon user-icon"></span>
@@ -81,13 +134,18 @@ const togglePassword = () => {
             </div>
 
             <!-- 登录按钮 -->
-            <button type="submit" class="login-btn">
-              <span>登录</span>
+            <button type="submit" class="login-btn" :disabled="loading">
+              <span>{{ loading ? '登录中...' : '登录' }}</span>
             </button>
+
+            <!-- 错误提示 -->
+            <div v-if="errorMessage" class="error-message">
+              {{ errorMessage }}
+            </div>
 
             <!-- 注册账号 -->
             <div class="register-link">
-              <a href="#">注册账号</a>
+              <router-link to="/register">注册账号</router-link>
             </div>
           </form>
         </div>
@@ -306,6 +364,21 @@ const togglePassword = () => {
 
 .login-btn:hover {
   opacity: 0.9;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 14px;
+  text-align: center;
+  padding: 8px;
+  background: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 4px;
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .register-link {
