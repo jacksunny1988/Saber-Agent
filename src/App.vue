@@ -1,17 +1,19 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import Login from './views/Login.vue'
 </script>
 
 <template>
-  <div class="container">
-    <HelloWorld msg="欢迎来到 Saber Agent" />
-  </div>
+  <Login />
 </template>
 
-<style scoped>
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 </style>
