@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "serena": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "claude-code",
+        "--project",
+        "D:/projects/Saber-Agent"
+      ],
+      "env": {}
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp",
+        "--api-key",
+        "ctx7sk-26c4b178-b345-41a4-9e92-c8c370d04a46"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--browserUrl=http://127.0.0.1:9222"
+      ],
+      "env": {
+        "SystemRoot": "C:\\Windows",
+        "PROGRAMFILES": "C:\\Program Files"
+      },
+      "startup_timeout_ms": 20000
+    }
+  }
+}
