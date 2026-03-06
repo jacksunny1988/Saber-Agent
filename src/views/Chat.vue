@@ -417,6 +417,7 @@ onMounted(() => {
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
+  min-height: 36px;
 }
 
 .input-box textarea {
