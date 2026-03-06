@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "mcp__serena__find_file",
-      "mcp__serena__list_dir"
+      "mcp__serena__list_dir",
+      "Bash(npm install:*)",
+      "mcp__zai-mcp-server__analyze_image",
+      "mcp__chrome-devtools__take_screenshot"
     ]
   }
 }

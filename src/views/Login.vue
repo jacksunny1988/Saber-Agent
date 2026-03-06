@@ -50,8 +50,8 @@ const handleLoginSubmit = async () => {
         localStorage.removeItem('saved_password')
       }
 
-      // 登录成功，跳转到首页
-      router.push('/')
+      // 登录成功，跳转到聊天页面
+      router.push('/chat')
     } else {
       errorMessage.value = res.msg || '登录失败'
     }

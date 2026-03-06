@@ -15,8 +15,10 @@
       "env": {}
     },
     "context7": {
-      "command": "npx",
+      "command": "cmd",
       "args": [
+        "/c",
+        "npx",
         "-y",
         "@upstash/context7-mcp",
         "--api-key",
@@ -37,6 +39,16 @@
         "PROGRAMFILES": "C:\\Program Files"
       },
       "startup_timeout_ms": 20000
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "@playwright/mcp@latest"
+      ],
+      "env": {}
     }
   }
 }
