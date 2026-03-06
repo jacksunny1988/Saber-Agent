@@ -151,7 +151,7 @@ onMounted(() => {
       <!-- 欢迎区域 -->
       <div class="welcome-section" v-if="!currentConversationId">
         <div class="welcome-content">
-          <img src="/robot.png" alt="欢迎" class="welcome-robot" />
+          <img src="/send-icon.png" alt="欢迎" class="welcome-robot" />
           <h1 class="welcome-title">你好，<br>我是你的人工智能助手赛小宝</h1>
           <p class="welcome-desc">快和我交流吧！我可以为你完成年假查询，员工手册等等事情，成为你的高效助手。</p>
         </div>
