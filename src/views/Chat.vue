@@ -115,32 +115,21 @@ onMounted(() => {
       <!-- Header -->
       <div class="sidebar-header">
         <div class="bot-info">
-          <img src="/robot.png" alt="赛小宝" class="bot-avatar" />
+          <img src="/bot1.png" alt="赛小宝" class="bot-avatar" />
           <div class="bot-text">
             <h2 class="bot-name">赛小宝</h2>
             <p class="bot-subtitle">你的智能助手</p>
           </div>
         </div>
-        <button class="menu-btn" title="菜单">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-          </svg>
-        </button>
       </div>
 
       <!-- 新建会话按钮 -->
       <button class="new-chat-btn" @click="handleNewConversation">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
-        <span>新建会话</span>
+        + 新建会话
       </button>
 
       <!-- 历史对话列表 -->
       <div class="conversation-list">
-        <h3 class="list-title">历史对话</h3>
         <div class="conversations">
           <div
             v-for="conv in conversations"
@@ -149,25 +138,11 @@ onMounted(() => {
             @click="selectConversation(conv.id)"
           >
             <svg class="chat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
             </svg>
             <span class="conversation-title">{{ conv.title }}</span>
           </div>
         </div>
-      </div>
-
-      <!-- 底部用户信息 -->
-      <div class="sidebar-footer">
-        <div class="user-info">
-          <span class="user-name">{{ userStore.userId || '用户' }}</span>
-        </div>
-        <button class="logout-btn" @click="handleLogout" title="退出登录">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16 17 21 12 16 7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
-        </button>
       </div>
     </aside>
 
@@ -177,10 +152,7 @@ onMounted(() => {
       <div class="welcome-section" v-if="!currentConversationId">
         <div class="welcome-content">
           <img src="/robot.png" alt="欢迎" class="welcome-robot" />
-          <div class="welcome-text">
-            <h2 class="welcome-title">你好，</h2>
-            <p class="welcome-subtitle">我是你的智能助手赛小宝</p>
-          </div>
+          <h1 class="welcome-title">你好，<br>我是你的人工智能助手赛小宝</h1>
           <p class="welcome-desc">快和我交流吧！我可以为你完成年假查询，员工手册等等事情，成为你的高效助手。</p>
         </div>
       </div>
@@ -188,7 +160,7 @@ onMounted(() => {
       <!-- 输入框区域 -->
       <div class="input-section">
         <div class="input-wrapper">
-          <!-- 输入框 -->
+          <!-- 输入框和发送按钮 -->
           <div class="input-box">
             <textarea
               v-model="messageInput"
@@ -206,7 +178,6 @@ onMounted(() => {
               </svg>
             </button>
           </div>
-
           <!-- 功能标签 -->
           <div class="feature-tags">
             <label :class="['feature-tag', { active: features.webSearch }]">
@@ -301,28 +272,10 @@ onMounted(() => {
   margin: 2px 0 0;
 }
 
-.menu-btn {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(24, 144, 255, 0.2);
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 6px;
-  color: #666;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.menu-btn:hover {
-  background: rgba(24, 144, 255, 0.15);
-}
-
 .new-chat-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   margin: 12px 16px;
   padding: 12px 20px;
   background: #fff;
@@ -398,42 +351,6 @@ onMounted(() => {
   flex: 1;
 }
 
-.sidebar-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  border-top: 1px solid rgba(24, 144, 255, 0.1);
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-}
-
-.user-name {
-  font-size: 13px;
-  color: #666;
-}
-
-.logout-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 6px;
-  color: #999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.logout-btn:hover {
-  background: rgba(255, 0, 0, 0.1);
-  color: #ff4d4f;
-}
-
 /* ========== 主内容区 ========== */
 .main-content {
   flex: 1;
@@ -472,16 +389,8 @@ onMounted(() => {
   font-size: 28px;
   color: #1890ff;
   font-weight: 500;
-  margin: 0;
-  display: inline;
-}
-
-.welcome-subtitle {
-  font-size: 28px;
-  color: #1890ff;
-  font-weight: 500;
-  margin: 0;
-  display: inline;
+  margin: 16px 0 12px;
+  line-height: 1.4;
 }
 
 .welcome-desc {
@@ -498,14 +407,14 @@ onMounted(() => {
 .input-wrapper {
   background: #fff;
   border-radius: 16px;
-  padding: 16px 20px;
+  padding: 12px 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(24, 144, 255, 0.15);
 }
 
 .input-box {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 12px;
   margin-bottom: 12px;
 }
@@ -532,19 +441,20 @@ onMounted(() => {
   height: 36px;
   border: none;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6ec3ff 0%, #00a8ff 100%);
-  color: #fff;
+  background: #e8f4fc;
+  color: #1890ff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s, transform 0.2s;
+  transition: all 0.2s;
   flex-shrink: 0;
+  padding: 0;
 }
 
 .send-btn:hover:not(:disabled) {
-  opacity: 0.9;
-  transform: scale(1.05);
+  background: #1890ff;
+  color: #fff;
 }
 
 .send-btn:disabled {

@@ -33,6 +33,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
 
+  // 加载 token
+  userStore.loadToken()
+
   // 检查是否需要登录
   if (to.meta.requiresAuth && !userStore.token) {
     next('/login')
