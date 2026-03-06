@@ -118,7 +118,7 @@ onMounted(() => {
           <img src="/bot1.png" alt="赛小宝" class="bot-avatar" />
           <div class="bot-text">
             <h2 class="bot-name">赛小宝</h2>
-            <p class="bot-subtitle">你的智能助手</p>
+            <h4 class="bot-subtitle">你的智能助手</h4>
           </div>
         </div>
       </div>
@@ -267,7 +267,7 @@ onMounted(() => {
 }
 
 .bot-subtitle {
-  font-size: 11px;
+  font-size: 13px;
   color: #666;
   margin: 2px 0 0;
 }
