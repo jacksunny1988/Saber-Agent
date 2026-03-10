@@ -1,8 +1,21 @@
 import request from '@/utils/request'
 
 /**
+ * 获取用户的历史对话列表
+ * @param {number} userId - 用户 ID
+ * @returns {Promise}
+ */
+export function getUserConversationList(userId) {
+  return request({
+    url: `/chat/conversations/${userId}`,
+    method: 'get'
+  })
+}
+
+/**
  * 获取历史对话列表
  * @returns {Promise}
+ * @deprecated 请使用 getUserConversationList(userId)
  */
 export function getConversationList() {
   return request({
